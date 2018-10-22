@@ -16,13 +16,24 @@ return [
     // 应用开始
     'app_begin'    => [],
     // 模块初始化
-    'module_init'  => [],
+    'module_init'  => [
+        'app\\common\\behavior\\SwitchIdentity'
+    ],
     // 操作开始执行
-    'action_begin' => [],
+    'action_begin' => [
+        'app\\common\\behavior\\Security',
+        'app\\common\\behavior\\Validate',
+    ],
     // 视图内容过滤
     'view_filter'  => [],
     // 日志写入
     'log_write'    => [],
     // 应用结束
     'app_end'      => [],
+    'switch_identity' => [
+        'app\\common\\behavior\\SwitchIdentity',
+    ],
+    'auth_check' => [
+        'app\\api\\behavior\\Auth',
+    ],
 ];

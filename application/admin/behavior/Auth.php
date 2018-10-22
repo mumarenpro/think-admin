@@ -1,10 +1,4 @@
 <?php
-
-/**
- * 权限控制行为
- * @createTime 2017/3/22 11:04
- */
-
 namespace app\admin\behavior;
 
 use Firebase\JWT\JWT;
