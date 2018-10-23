@@ -11,6 +11,7 @@ use think\facade\Request;
 use think\facade\Response;
 use think\facade\Hook;
 use think\exception\HttpResponseException;
+use logger\Logger;
 
 class Security extends Controller
 {
@@ -27,11 +28,11 @@ class Security extends Controller
         $module = Request::module();
         $type = $this->getResponseType();
         if (in_array($controller, $authAllow['controller']) || in_array($action, $authAllow['action']) || in_array($module, $authAllow['module'])) {
+            Logger::save($module.'方法不走安全验证', 'debug.log');
             return true;
         }
         $params = Request::post();
         $requestSign = Request::header('Sign');
-
         //是否需要验证签名
         if (Env::get('app.sign_check') && !empty($params)) {
             $linkString = build_link_string($params);
@@ -59,7 +60,7 @@ class Security extends Controller
 
         //验证nonce是否存在
         if (isset($params['nonce']) && !empty($params['nonce'])) {
-            $nonceCacheKey = Config::get('cache_option.prefix')['sports_api'] . 'replay_attacks_nonce_' . $params['nonce'];
+            $nonceCacheKey = Config::get('cache_option.prefix')['nonce_cache_key'] . $params['nonce'];
             $nonce = Cache::get($nonceCacheKey);
             if ($nonce) {
                 $data = ['errorcode' => EC_NONCE_USED, 'message' => Config::pull('errorcode')[EC_NONCE_USED]];

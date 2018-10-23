@@ -12,12 +12,14 @@
 // 应用行为扩展定义文件
 return [
     // 应用初始化
-    'app_init'     => [],
+    'app_init'     => [
+
+    ],
     // 应用开始
     'app_begin'    => [],
     // 模块初始化
     'module_init'  => [
-        'app\\common\\behavior\\SwitchIdentity'
+
     ],
     // 操作开始执行
     'action_begin' => [
@@ -30,9 +32,7 @@ return [
     'log_write'    => [],
     // 应用结束
     'app_end'      => [],
-    'switch_identity' => [
-        'app\\common\\behavior\\SwitchIdentity',
-    ],
+
     'auth_check' => [
         'app\\api\\behavior\\Auth',
     ],

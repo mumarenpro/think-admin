@@ -1,9 +1,10 @@
 <?php
+
 namespace app\admin\behavior;
 
 use Firebase\JWT\JWT;
 use logger\Logger;
-use think\Exception;
+use Exception;
 use think\facade\Cache;
 use think\facade\Config;
 use think\facade\Request;
@@ -17,6 +18,7 @@ class Auth
      */
     public function run()
     {
+        Logger::save('Auth->run', 'auth-debug.log');
         // 排除不执行校验Toen的方法, 配置文件中配置
         $authAllow = Config::get('common.admin_auth_allow');
         $controller = Request::controller();
@@ -30,9 +32,9 @@ class Auth
         $userAgent = Request::header('user-agent');
 
         // 验证token合法性
-        try{
-            $tokenInfo = Jwt::decode($token, Config::get('token_sign_key'));
-        }catch (Exception $exception){
+        try {
+            $tokenInfo = Jwt::decode($token, Config::get('common.token_sign_key'));
+        } catch (Exception $exception) {
             Logger::save($exception->getMessage(), 'auth.log');
             $data = [
                 'errorcode' => EC_AD_TOKEN_ERROR,

@@ -11,7 +11,6 @@ return [
     EC_API_TIMEOUT             => '当前请求已过期失效，请您校准设备时间',
     EC_NONCE_USED              => 'API重复请求',
     EC_PARAMS_ILLEGAL          => '请求参数不合法',
-    EC_FIND_NO_EXISTS          => '查询数据不存在',
     EC_EVENTS_TYPE_EMPTY       => '赛事类型获取失败',
     EC_SPORT_INFO_EMPTY        => '体育项目获取失败',
     EC_DATABASE_ERROR          => '数据库操作错误',
