@@ -1,6 +1,9 @@
 <?php
 // 应用公共文件
 
+use data_format\DataFormat;
+use think\facade\Config;
+
 function get_cross_headers()
 {
     $host_name = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : "*";
@@ -57,4 +60,17 @@ function build_link_string($params)
     }
 
     return $query;
+}
+
+
+function send_response($result, $errorCode, $errorMessage = null)
+{
+    $response = [];
+    if (is_array($result) || is_object($result)) {
+        $response['data'] = DataFormat::outputFormat($result);
+    }
+    $response['errorcode'] = $errorCode;
+    $response['message'] = $errorMessage ? $errorMessage : Config::pull('errorcode')[$errorCode];
+
+    return $response;
 }

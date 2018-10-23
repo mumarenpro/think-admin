@@ -20,4 +20,10 @@ return [
     EC_ADVERTISING_ADD_FAIL    => '广告信息添加失败',
     EC_DETAIL_NO_EXISTS        => '详情不存在',
     EC_DATE_RANGE_ILLEGAL      => '超出查询时间范围限制',
+
+    //admin\member
+    EC_AD_MEMBER_LOGIN_ERROR => '管理员登录出错!',
+    EC_AD_MEMBER_NOT_EXIST => '管理员不存在!',
+    EC_AD_MEMBER_PASSWORD_ERROR => '管理员登录密码错误!',
+
 ];

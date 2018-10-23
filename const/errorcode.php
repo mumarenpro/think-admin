@@ -1,7 +1,5 @@
 <?php
 
-define('EC_AD_SUCCESS', 200);
-
 define('EC_SUCCESS', 200);
 define('EC_FAILURE', 500);
 define('EC_SIGN_ERROR', 100001);
@@ -29,8 +27,11 @@ define('EC_AD_PUSH_ERROR', 200007);
 define('EC_AD_PUSH_PART_ERROR', 220001);
 define('EC_AD_EDIT_SUCCESS', 206011);
 
-//用户模块
+//Member
 define('EC_AD_REG_CAPTCHA_ERROR', 201001);
 define('EC_AD_REG_USER_EXISTING', 201002);
 define('EC_AD_REG_FAILURE', 201003);
 define('EC_AD_OTHER_LOGIN', 201004);
+define('EC_AD_MEMBER_LOGIN_ERROR', 201005);
+define('EC_AD_MEMBER_NOT_EXIST', 201006);
+define('EC_AD_MEMBER_PASSWORD_ERROR', 201007);
