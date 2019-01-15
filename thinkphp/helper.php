@@ -130,19 +130,19 @@ if (!function_exists('cache')) {
         } elseif (is_null($value)) {
             // 删除缓存
             return Cache::rm($name);
-        } else {
-            // 缓存数据
-            if (is_array($options)) {
-                $expire = isset($options['expire']) ? $options['expire'] : null; //修复查询缓存无法设置过期时间
-            } else {
-                $expire = is_numeric($options) ? $options : null; //默认快捷缓存设置过期时间
-            }
+        }
 
-            if (is_null($tag)) {
-                return Cache::set($name, $value, $expire);
-            } else {
-                return Cache::tag($tag)->set($name, $value, $expire);
-            }
+        // 缓存数据
+        if (is_array($options)) {
+            $expire = isset($options['expire']) ? $options['expire'] : null; //修复查询缓存无法设置过期时间
+        } else {
+            $expire = is_numeric($options) ? $options : null; //默认快捷缓存设置过期时间
+        }
+
+        if (is_null($tag)) {
+            return Cache::set($name, $value, $expire);
+        } else {
+            return Cache::tag($tag)->set($name, $value, $expire);
         }
     }
 }
@@ -313,9 +313,9 @@ if (!function_exists('download')) {
      * @param integer $expire 有效期（秒）
      * @return \think\response\Download
      */
-    function download($filename, $name = '', $content = false, $expire = 180)
+    function download($filename, $name = '', $content = false, $expire = 360, $openinBrower = false)
     {
-        return Response::create($filename, 'download')->name($name)->isContent($content)->expire($expire);
+        return Response::create($filename, 'download')->name($name)->isContent($content)->expire($expire)->openinBrower($openinBrower);
     }
 }
 
@@ -716,23 +716,5 @@ if (!function_exists('yaconf')) {
     function yaconf($name, $default = null)
     {
         return Config::yaconf($name, $default);
-    }
-}
-
-
-if (!function_exists('collection')) {
-    /**
-     * 数组转换为数据集对象
-     * @param array $resultSet 数据集数组
-     * @return \think\model\Collection|\think\Collection
-     */
-    function collection($resultSet)
-    {
-        $item = current($resultSet);
-        if ($item instanceof Model) {
-            return \think\model\Collection::make($resultSet);
-        } else {
-            return \think\Collection::make($resultSet);
-        }
     }
 }
